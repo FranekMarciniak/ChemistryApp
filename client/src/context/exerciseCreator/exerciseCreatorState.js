@@ -25,6 +25,7 @@ function ExerciseCreatorState(props) {
     blueprints: [],
     currentExercise: {},
     errors: [],
+    doneExercises: [],
   };
   const [state, dispatch] = useReducer(ExerciseCreatorReducer, initialState);
   const setCurrentBlueprintFromList = (id) => {
@@ -109,18 +110,21 @@ function ExerciseCreatorState(props) {
       console.log(error);
     }
   };
-  const getExerciseFromAPI = async () => {
+  const getTestExerciseFromAPI = async () => {
     const config = {
       headers: {
         "Content-Type": "application/json",
       },
     };
     try {
-      const res = await axios.get("/api/exercises", config);
-      dispatch({ type: GET_EXERCISE_FROM_API, payload: res.data[0] });
+      const res = await axios.get("/api/test", config);
+      dispatch({ type: GET_EXERCISE_FROM_API, payload: res.data });
     } catch (error) {
       console.log(error);
     }
+  };
+  const postTestExerciseFromAPI = (data) => {
+    console.log(data);
   };
   const postExerciseToAPI = (data) => {
     let empty = false;
@@ -174,6 +178,7 @@ function ExerciseCreatorState(props) {
         currentBlueprint: state.currentBlueprint,
         testExercise: state.testExercise,
         errors: state.errors,
+        doneExercises: state.doneExercises,
         setCurrentBlueprintFromList,
         updateExercise,
         setExerciseFromBlueprint,
@@ -184,8 +189,9 @@ function ExerciseCreatorState(props) {
         setCurrentTestExercise,
         clearCurrentBlueprint,
         getBlueprintsFromAPI,
-        getExerciseFromAPI,
+        getTestExerciseFromAPI,
         postExerciseToAPI,
+        postTestExerciseFromAPI,
       }}
     >
       {props.children}

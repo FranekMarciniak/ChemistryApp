@@ -20,6 +20,9 @@ const ButtonWrapper = styled.div`
   height: 50px;
   margin-top: 25px;
   display: flex;
+  button {
+    margin-left: 15px;
+  }
 `;
 
 function ExerciseCreatorForm() {
@@ -29,16 +32,11 @@ function ExerciseCreatorForm() {
   const {
     currentExercise,
     currentBlueprint,
-    setCurrentBlueprintFromAPI,
     setExerciseFromBlueprint,
-    setCurrentTestExercise,
-    testExercise,
-    getExerciseFromAPI,
-    setExerciseName,
+    getTestExerciseFromAPI,
+    postTestExerciseFromAPI,
   } = exerciseCreatorContext;
-  useEffect(() => {
-    getExerciseFromAPI();
-  }, []);
+
   useEffect(() => {
     setExerciseFromBlueprint(currentBlueprint);
   }, [currentBlueprint]);
@@ -55,6 +53,22 @@ function ExerciseCreatorForm() {
         <MiddleArrow top={currentBlueprint.top} />
       ) : null}
       <RightSide />
+      <ButtonWrapper>
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={getTestExerciseFromAPI}
+        >
+          Get exercise!
+        </Button>
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={() => postTestExerciseFromAPI(currentExercise)}
+        >
+          Post your answer!
+        </Button>
+      </ButtonWrapper>
     </ExerciseFormWrapper>
   );
 }

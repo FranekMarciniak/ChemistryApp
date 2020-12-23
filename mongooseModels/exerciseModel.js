@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
+var random = require("mongoose-simple-random");
 
 const exerciseSchema = new Schema({
   blueprint: {
@@ -28,4 +29,5 @@ const exerciseSchema = new Schema({
   },
   user: String,
 });
+exerciseSchema.plugin(random);
 module.exports = model("Exercise", exerciseSchema);
