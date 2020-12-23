@@ -36,6 +36,7 @@ export default (state, action) => {
         ...state,
         testExercise: action.payload.exercise,
         currentBlueprint: action.payload.blueprint,
+        doneExercises: [...state.doneExercises, action.payload._id],
       };
     case SET_CURRENT_TEST_EXERCISE:
       return {
