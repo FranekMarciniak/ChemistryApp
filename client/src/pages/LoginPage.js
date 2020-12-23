@@ -48,7 +48,7 @@ function LoginPage(props) {
         <TextField
           required
           label="Wpisz email"
-          id="name"
+          id="email"
           InputLabelProps={{
             shrink: true,
           }}
@@ -62,7 +62,8 @@ function LoginPage(props) {
         <TextField
           required
           label="Wpisz hasło"
-          id="name"
+          id="password"
+          type="password"
           InputLabelProps={{
             shrink: true,
           }}
