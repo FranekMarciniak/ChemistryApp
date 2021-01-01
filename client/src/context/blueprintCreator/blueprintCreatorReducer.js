@@ -24,7 +24,10 @@ export default (state, action) => {
     case SET_ERROR:
       return {
         ...state,
-        errors: [...state.errors, action.payload],
+        errors: [
+          ...state.errors,
+          { data: action.payload.data, severity: action.payload.severity },
+        ],
       };
     case CLEAR_ERROR:
       return {

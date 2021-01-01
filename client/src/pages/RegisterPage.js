@@ -1,5 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
-import { TextField, Typography, makeStyles, Button } from "@material-ui/core";
+import {
+  TextField,
+  Typography,
+  makeStyles,
+  Button,
+  FormControl,
+} from "@material-ui/core";
 import styled from "styled-components";
 import { AuthContext } from "../context/auth/authState";
 const FormRow = styled.div`
@@ -41,8 +47,16 @@ function RegisterPage(props) {
     email: "",
     password: "",
   });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    authContext.registerUser({
+      name: form.name,
+      email: form.email.toLowerCase(),
+      password: form.password,
+    });
+  };
   return (
-    <div>
+    <form onSubmit={handleSubmit}>
       <FormRow>
         <Typography className={classes.typography}>Twój login</Typography>
         <TextField
@@ -89,21 +103,16 @@ function RegisterPage(props) {
       <FormRow>
         <Button
           variant="contained"
-          color="secondary"
+          type="submit"
+          color="primary"
           disableElevation
           className={classes.button}
-          onClick={(e) => {
-            authContext.registerUser({
-              name: form.name,
-              email: form.email.toLowerCase(),
-              password: form.password,
-            });
-          }}
+          onClick={handleSubmit}
         >
           Register
         </Button>
       </FormRow>
-    </div>
+    </form>
   );
 }
 export default RegisterPage;

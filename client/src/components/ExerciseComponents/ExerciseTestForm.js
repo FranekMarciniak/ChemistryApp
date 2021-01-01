@@ -5,7 +5,7 @@ import { ExerciseCreatorContext } from "../../context/exerciseCreator/exerciseCr
 import RightSide from "./RightSide";
 import LeftSide from "./LeftSide";
 
-import { Button } from "@material-ui/core";
+import { Button, Typography } from "@material-ui/core";
 import ExerciseName from "./ExerciseName";
 const ExerciseFormWrapper = styled.div`
   width: 90%;
@@ -34,7 +34,7 @@ function ExerciseCreatorForm() {
     currentBlueprint,
     setExerciseFromBlueprint,
     getTestExerciseFromAPI,
-    postTestExerciseFromAPI,
+    postTestExerciseToAPI,
   } = exerciseCreatorContext;
 
   useEffect(() => {
@@ -47,27 +47,30 @@ function ExerciseCreatorForm() {
       currentExercise.rightSide.length > 0 &&
       currentExercise.leftSide.length > 0 ? (
         <ExerciseName />
-      ) : null}
+      ) : (
+        <Typography variant="h4">
+          Hello, click button below to get your first exercise!
+        </Typography>
+      )}
       <LeftSide />
       {currentBlueprint.leftSide > 0 && currentBlueprint.rightSide > 0 ? (
         <MiddleArrow top={currentBlueprint.top} />
       ) : null}
       <RightSide />
       <ButtonWrapper>
-        <Button
-          variant="contained"
-          color="secondary"
-          onClick={getTestExerciseFromAPI}
-        >
-          Get exercise!
+        <Button variant="contained" onClick={getTestExerciseFromAPI}>
+          Get new exercise!
         </Button>
-        <Button
-          variant="contained"
-          color="secondary"
-          onClick={() => postTestExerciseFromAPI(currentExercise)}
-        >
-          Post your answer!
-        </Button>
+        {currentExercise.leftSide === undefined ||
+        currentExercise.leftSide.length > 0 ? (
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => postTestExerciseToAPI(currentExercise)}
+          >
+            Check!
+          </Button>
+        ) : null}
       </ButtonWrapper>
     </ExerciseFormWrapper>
   );

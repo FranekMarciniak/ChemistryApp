@@ -47,7 +47,7 @@ router.post(
         payload,
         "***REMOVED***",
         {
-          expiresIn: 36000,
+          expiresIn: 36500,
         },
         (err, token) => {
           if (err) throw err;
@@ -96,7 +96,7 @@ router.post(
         payload,
         "***REMOVED***",
         {
-          expiresIn: 36000,
+          expiresIn: 36500,
         },
         (err, token) => {
           if (err) throw err;
