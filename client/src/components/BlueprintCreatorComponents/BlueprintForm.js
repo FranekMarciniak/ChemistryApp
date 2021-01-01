@@ -1,6 +1,3 @@
-//Component info:
-//
-
 import React, { useContext } from "react";
 import styled from "styled-components";
 import {
@@ -9,7 +6,6 @@ import {
   makeStyles,
   Switch,
   Button,
-  Input,
 } from "@material-ui/core";
 import { BlueprintCreatorContext } from "../../context/blueprintCreator/blueprintCreatorState";
 
@@ -55,90 +51,96 @@ const BlueprintForm = () => {
     postBlueprintToAPI,
     state,
   } = blueprintCreatorContext;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    postBlueprintToAPI();
+  };
   return (
-    <BlueprintFormWrapper>
-      <FormRow>
-        <Typography className={classes.typography}>
-          Podaj Nazwę blueprinttu
-        </Typography>
-        <TextField
-          required
-          label="Nazwa blueprinttu"
-          id="name"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          value={state.name}
-          className={classes.textFiled}
-          onChange={(e) => {
-            setBlueprintName(e.target.value);
-          }}
-        />
-      </FormRow>
+    <form onSubmit={handleSubmit}>
+      <BlueprintFormWrapper>
+        <FormRow>
+          <Typography className={classes.typography}>
+            Podaj Nazwę blueprinttu
+          </Typography>
+          <TextField
+            required
+            label="Nazwa blueprinttu"
+            id="name"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            value={state.name}
+            className={classes.textFiled}
+            onChange={(e) => {
+              setBlueprintName(e.target.value);
+            }}
+          />
+        </FormRow>
 
-      <FormRow>
-        <Typography className={classes.typography}>
-          Podaj liczbę substraktów
-        </Typography>
-        <TextField
-          required
-          size="small"
-          label="Numer"
-          type="number"
-          id="leftSide"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          className={classes.textFiledNumber}
-          value={state.leftSide}
-          onChange={(e) => setBlueprintLeft(e.target.value)}
-        />
-      </FormRow>
+        <FormRow>
+          <Typography className={classes.typography}>
+            Podaj liczbę substraktów
+          </Typography>
+          <TextField
+            required
+            size="small"
+            label="Numer"
+            type="number"
+            id="leftSide"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            className={classes.textFiledNumber}
+            value={state.leftSide}
+            onChange={(e) => setBlueprintLeft(e.target.value)}
+          />
+        </FormRow>
 
-      <FormRow>
-        <Typography className={classes.typography}>
-          Podaj liczbę produktów
-        </Typography>
-        <TextField
-          required
-          size="small"
-          type="number"
-          label="Numer"
-          id="rightSide"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          className={classes.textFiledNumber}
-          value={state.rightSide}
-          onChange={(e) => setBlueprintRight(e.target.value)}
-        />
-      </FormRow>
-      <FormRow>
-        <Typography className={classes.typography}>
-          Czy chcesz dyngs nad strzałką
-        </Typography>
-        <Switch
-          name="checkedA"
-          id="top"
-          inputProps={{ "aria-label": "secondary checkbox" }}
-          onChange={(e) => {
-            setBlueprintTop(e.target.checked);
-          }}
-          checked={state.top}
-        />
-      </FormRow>
-      <FormRow>
-        <Button
-          variant="contained"
-          color="secondary"
-          disableElevation
-          className={classes.button}
-          onClick={postBlueprintToAPI}
-        >
-          Dodaj Blueprintt
-        </Button>
-      </FormRow>
-    </BlueprintFormWrapper>
+        <FormRow>
+          <Typography className={classes.typography}>
+            Podaj liczbę produktów
+          </Typography>
+          <TextField
+            required
+            size="small"
+            type="number"
+            label="Numer"
+            id="rightSide"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            className={classes.textFiledNumber}
+            value={state.rightSide}
+            onChange={(e) => setBlueprintRight(e.target.value)}
+          />
+        </FormRow>
+        <FormRow>
+          <Typography className={classes.typography}>
+            Czy chcesz dyngs nad strzałką
+          </Typography>
+          <Switch
+            name="checkedA"
+            id="top"
+            onChange={(e) => {
+              setBlueprintTop(e.target.checked);
+            }}
+            checked={state.top}
+          />
+        </FormRow>
+        <FormRow>
+          <Button
+            variant="contained"
+            color="primary"
+            type="submit"
+            disableElevation
+            className={classes.button}
+            onClick={handleSubmit}
+          >
+            Dodaj Blueprintt
+          </Button>
+        </FormRow>
+      </BlueprintFormWrapper>
+    </form>
   );
 };
 

@@ -2,7 +2,6 @@ const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 const cors = require("cors");
-
 const db = mongoose.connection;
 const app = express();
 
@@ -23,7 +22,7 @@ app.use("/api/exercises", require("./routes/exercise"));
 app.use("/api/test", require("./routes/test"));
 app.use("/api/users", require("./routes/users"));
 
-const PORT = process.env.port || 6000;
+const PORT = process.env.port || 7400;
 
 app.use(express.static("client/build"));
 app.get("*", (req, res) => {

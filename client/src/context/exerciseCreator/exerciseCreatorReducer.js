@@ -14,6 +14,7 @@ import {
   POST_EXERCISE_TO_API,
   SET_ERROR,
   CLEAR_ERROR,
+  CLEAR_ALL,
 } from "../types.js";
 export default (state, action) => {
   switch (action.type) {
@@ -34,7 +35,10 @@ export default (state, action) => {
     case GET_EXERCISE_FROM_API:
       return {
         ...state,
-        testExercise: action.payload.exercise,
+        testExercise: {
+          name: action.payload.exercise.name,
+          id: action.payload._id,
+        },
         currentBlueprint: action.payload.blueprint,
         doneExercises: [...state.doneExercises, action.payload._id],
       };
@@ -111,12 +115,25 @@ export default (state, action) => {
     case SET_ERROR:
       return {
         ...state,
-        errors: [...state.errors, action.payload],
+        errors: [
+          ...state.errors,
+          { data: action.payload.data, severity: action.payload.severity },
+        ],
       };
     case CLEAR_ERROR:
       return {
         ...state,
         errors: [],
+      };
+    case CLEAR_ALL:
+      return {
+        ...state,
+        testExercise: {},
+        currentBlueprint: {},
+        blueprints: [],
+        currentExercise: {},
+        errors: [],
+        doneExercises: [],
       };
     default:
       return { ...state };

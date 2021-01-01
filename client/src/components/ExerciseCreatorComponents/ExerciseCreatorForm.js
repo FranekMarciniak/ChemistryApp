@@ -60,7 +60,7 @@ function ExerciseCreatorForm() {
         <ButtonWrapper>
           <Button
             variant="contained"
-            color="secondary"
+            color="primary"
             disableElevation
             onClick={() => postExerciseToAPI()}
           >

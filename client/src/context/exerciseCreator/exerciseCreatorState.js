@@ -12,6 +12,9 @@ import {
   POST_EXERCISE_TO_API,
   SET_ERROR,
   CLEAR_ERROR,
+  CLEAR_ALL,
+  POST_TEST_EXERCISE_TO_API_FAIL,
+  POST_TEST_EXERCISE_TO_API_SUCCESS,
 } from "../types.js";
 import axios from "axios";
 import React, { useReducer, createContext } from "react";
@@ -19,6 +22,11 @@ import ExerciseCreatorReducer from "./exerciseCreatorReducer";
 export const ExerciseCreatorContext = createContext();
 const { Provider } = ExerciseCreatorContext;
 function ExerciseCreatorState(props) {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
   const initialState = {
     testExercise: {},
     currentBlueprint: {},
@@ -98,11 +106,6 @@ function ExerciseCreatorState(props) {
     });
   };
   const getBlueprintsFromAPI = async () => {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
     try {
       const res = await axios.get("/api/blueprints", config);
       dispatch({ type: GET_BLUEPRINTS_FROM_API, payload: res.data });
@@ -111,11 +114,6 @@ function ExerciseCreatorState(props) {
     }
   };
   const getTestExerciseFromAPI = async () => {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
     try {
       const res = await axios.get("/api/test", config);
       dispatch({ type: GET_EXERCISE_FROM_API, payload: res.data });
@@ -123,18 +121,44 @@ function ExerciseCreatorState(props) {
       console.log(error);
     }
   };
-  const postTestExerciseFromAPI = (data) => {
-    console.log(data);
-  };
-  const postExerciseToAPI = (data) => {
-    let empty = false;
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
+  const postTestExerciseToAPI = async (blob) => {
+    const data = {
+      ...blob,
+      id: state.testExercise.id,
     };
+    try {
+      const res = await axios.post("/api/test", data, config);
+
+      if (res.data == true) {
+        dispatch({
+          type: SET_ERROR,
+          payload: {
+            data: "Gratulacje, bezbłednie!",
+            severity: "success",
+          },
+        });
+        setTimeout(() => dispatch({ type: CLEAR_ERROR }), 3500);
+      } else if (res.data == false) {
+        dispatch({
+          type: SET_ERROR,
+          payload: {
+            data: "Coś się nie zgadza...",
+            severity: "error",
+          },
+        });
+        setTimeout(() => dispatch({ type: CLEAR_ERROR }), 3500);
+      }
+    } catch (error) {
+      console.log(error.data);
+    }
+  };
+  const postExerciseToAPI = () => {
+    let empty = false;
     if (state.currentExercise.name === "") {
-      dispatch({ type: SET_ERROR, payload: "Ustaw nazwę przykładu. " });
+      dispatch({
+        type: SET_ERROR,
+        payload: { data: "Ustaw nazwę przykładu", severity: "warning" },
+      });
       setTimeout(() => dispatch({ type: CLEAR_ERROR }), 3500);
       return;
     }
@@ -151,7 +175,10 @@ function ExerciseCreatorState(props) {
     if (empty) {
       dispatch({
         type: SET_ERROR,
-        payload: "Wszystkie pola oprócz wskaźników muszą być wypełnione. ",
+        payload: {
+          data: "Wszystkie pola oprócz wskaźników muszą być wypełnione. ",
+          severity: "warning",
+        },
       });
       setTimeout(() => dispatch({ type: CLEAR_ERROR }), 3500);
       return;
@@ -169,6 +196,9 @@ function ExerciseCreatorState(props) {
     } catch (error) {
       console.log(error);
     }
+  };
+  const clearAll = () => {
+    dispatch({ type: CLEAR_ALL });
   };
   return (
     <Provider
@@ -191,7 +221,8 @@ function ExerciseCreatorState(props) {
         getBlueprintsFromAPI,
         getTestExerciseFromAPI,
         postExerciseToAPI,
-        postTestExerciseFromAPI,
+        postTestExerciseToAPI,
+        clearAll,
       }}
     >
       {props.children}
