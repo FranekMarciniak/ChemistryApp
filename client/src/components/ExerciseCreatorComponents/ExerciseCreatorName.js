@@ -20,7 +20,7 @@ function ExerciseName() {
     <NameWrapper>
       <TextField
         required
-        label="Nazwa przykładu"
+        label="Exercise name"
         id="name"
         InputLabelProps={{
           shrink: true,

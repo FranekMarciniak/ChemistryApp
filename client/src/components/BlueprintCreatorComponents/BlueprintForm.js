@@ -59,12 +59,10 @@ const BlueprintForm = () => {
     <form onSubmit={handleSubmit}>
       <BlueprintFormWrapper>
         <FormRow>
-          <Typography className={classes.typography}>
-            Podaj Nazwę blueprinttu
-          </Typography>
+          <Typography className={classes.typography}>Blueprint name</Typography>
           <TextField
             required
-            label="Nazwa blueprinttu"
+            label="Enter blueprint name"
             id="name"
             InputLabelProps={{
               shrink: true,
@@ -79,7 +77,7 @@ const BlueprintForm = () => {
 
         <FormRow>
           <Typography className={classes.typography}>
-            Podaj liczbę substraktów
+            Enter number of substrates
           </Typography>
           <TextField
             required
@@ -98,7 +96,7 @@ const BlueprintForm = () => {
 
         <FormRow>
           <Typography className={classes.typography}>
-            Podaj liczbę produktów
+            Enter number of products
           </Typography>
           <TextField
             required
@@ -116,7 +114,7 @@ const BlueprintForm = () => {
         </FormRow>
         <FormRow>
           <Typography className={classes.typography}>
-            Czy chcesz dyngs nad strzałką
+            That thig above the arrow
           </Typography>
           <Switch
             name="checkedA"
@@ -136,7 +134,7 @@ const BlueprintForm = () => {
             className={classes.button}
             onClick={handleSubmit}
           >
-            Dodaj Blueprintt
+            Add blueprint
           </Button>
         </FormRow>
       </BlueprintFormWrapper>

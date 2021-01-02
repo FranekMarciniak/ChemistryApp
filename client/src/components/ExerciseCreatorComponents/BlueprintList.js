@@ -19,14 +19,14 @@ function BlueprintsList() {
   }, []);
   return (
     <>
-      <InputLabel id="demo-mutiple-name-label">Nazwa blueprinttu</InputLabel>
+      <InputLabel id="demo-mutiple-name-label">Blueprint name</InputLabel>
       <Select
         labelId="demo-mutiple-name-label"
         value={currentBlueprint.name === undefined ? "0" : currentBlueprint._id}
         onChange={(e) => setCurrentBlueprintFromList(e.target.value)}
       >
         <MenuItem value="0" key="0">
-          <em>Nie no, najpierw wybierz blueprintt ziom</em>
+          <em>Choose a blueprint</em>
         </MenuItem>
         {blueprints.map((blueprint, index) => (
           <MenuItem value={blueprint._id} key={index + 1}>

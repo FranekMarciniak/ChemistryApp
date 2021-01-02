@@ -31,7 +31,7 @@ function BlueprintCreatorState(props) {
     if (state.name === "") {
       dispatch({
         type: SET_ERROR,
-        payload: { data: "Blueprint musi mieć nazwę.", severity: "warning" },
+        payload: { data: "Blueprint should have name", severity: "warning" },
       });
       setTimeout(() => dispatch({ type: CLEAR_ERROR }), 3500);
       return;
@@ -45,7 +45,7 @@ function BlueprintCreatorState(props) {
       dispatch({
         type: SET_ERROR,
         payload: {
-          data: "Blueprint musi mieć conajmniej jeden substrakt i produkt.",
+          data: "Blueprint should have at least one product and one substrate",
           severity: "warning",
         },
       });

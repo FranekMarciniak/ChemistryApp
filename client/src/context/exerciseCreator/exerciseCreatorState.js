@@ -133,7 +133,7 @@ function ExerciseCreatorState(props) {
         dispatch({
           type: SET_ERROR,
           payload: {
-            data: "Gratulacje, bezbłednie!",
+            data: "Congrats, flawless",
             severity: "success",
           },
         });
@@ -142,7 +142,7 @@ function ExerciseCreatorState(props) {
         dispatch({
           type: SET_ERROR,
           payload: {
-            data: "Coś się nie zgadza...",
+            data: "Something is wrong...",
             severity: "error",
           },
         });
@@ -157,7 +157,7 @@ function ExerciseCreatorState(props) {
     if (state.currentExercise.name === "") {
       dispatch({
         type: SET_ERROR,
-        payload: { data: "Ustaw nazwę przykładu", severity: "warning" },
+        payload: { data: "Set exercise name", severity: "warning" },
       });
       setTimeout(() => dispatch({ type: CLEAR_ERROR }), 3500);
       return;
@@ -176,7 +176,7 @@ function ExerciseCreatorState(props) {
       dispatch({
         type: SET_ERROR,
         payload: {
-          data: "Wszystkie pola oprócz wskaźników muszą być wypełnione. ",
+          data: "All the fields must be filled",
           severity: "warning",
         },
       });
