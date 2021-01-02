@@ -36,7 +36,7 @@ export default (state, action) => {
       return {
         ...state,
         testExercise: {
-          name: action.payload.exercise.name,
+          ...action.payload.exercise,
           id: action.payload._id,
         },
         currentBlueprint: action.payload.blueprint,
