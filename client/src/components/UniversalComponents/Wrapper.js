@@ -14,6 +14,7 @@ const WrapperSection = styled.section`
   }
   @media (max-width: 970px) {
     width: 85%;
+    margin: 15px;
   }
 `;
 function Wrapper({ children }) {

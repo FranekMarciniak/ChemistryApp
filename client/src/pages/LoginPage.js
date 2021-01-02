@@ -57,10 +57,10 @@ function LoginPage(props) {
   return (
     <form onSubmit={handleSubmit}>
       <FormRow>
-        <Typography className={classes.typography}>Twój email</Typography>
+        <Typography className={classes.typography}>Your email</Typography>
         <TextField
           required
-          label="Wpisz email"
+          label="Enter your mail"
           id="email"
           InputLabelProps={{
             shrink: true,
@@ -71,10 +71,10 @@ function LoginPage(props) {
         />
       </FormRow>
       <FormRow>
-        <Typography className={classes.typography}>Twoje hasło</Typography>
+        <Typography className={classes.typography}>Your password</Typography>
         <TextField
           required
-          label="Wpisz hasło"
+          label="Ener your password"
           id="password"
           type="password"
           InputLabelProps={{

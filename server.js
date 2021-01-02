@@ -22,7 +22,7 @@ app.use("/api/exercises", require("./routes/exercise"));
 app.use("/api/test", require("./routes/test"));
 app.use("/api/users", require("./routes/users"));
 
-const PORT = process.env.port || 6000;
+const PORT = process.env.port || 7000;
 console.log(PORT);
 app.use(express.static("client/build"));
 app.get("*", (req, res) => {
