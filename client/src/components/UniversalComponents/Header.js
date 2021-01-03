@@ -18,6 +18,7 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import { AuthContext } from "../../context/auth/authState";
+import { ExerciseCreatorContext } from "../../context/exerciseCreator/exerciseCreatorState";
 
 const drawerWidth = 240;
 
@@ -88,6 +89,8 @@ function Header() {
   // eslint-disable-next-line
   const { isAuthenticated, logout } = authContext;
   // eslint-disable-next-line
+  const exerciseCreatorContext = useContext(ExerciseCreatorContext);
+  const { clearAll } = exerciseCreatorContext;
   const publicMenu = [
     { name: "Home", path: "/" },
     { name: "Register", path: "/register" },
@@ -131,7 +134,6 @@ function Header() {
           <Typography variant="h6" noWrap className={classes.title}>
             ChemionatorX
           </Typography>
-          {console.log(isAuthenticated)}
           {isAuthenticated === null || isAuthenticated === false ? (
             <>
               <Link
@@ -154,7 +156,13 @@ function Header() {
               </Link>
             </>
           ) : (
-            <Button color="inherit" onClick={logout}>
+            <Button
+              color="inherit"
+              onClick={(e) => {
+                logout();
+                clearAll();
+              }}
+            >
               Logout
             </Button>
           )}
@@ -179,22 +187,41 @@ function Header() {
           </IconButton>
         </div>
         <Divider />
-        <List>
-          {privateList.map((blob, index) => (
-            <Link
-              to={blob.path}
-              key={blob.name}
-              style={{
-                textDecoration: "none",
-                color: "rgba(255, 255, 255, 0.87)",
-              }}
-            >
-              <ListItem button onClick={() => setOpen(false)}>
-                <ListItemText primary={blob.name} />
-              </ListItem>
-            </Link>
-          ))}
-        </List>
+        {isAuthenticated === null || isAuthenticated === false ? (
+          <List>
+            {publicMenu.map((blob, index) => (
+              <Link
+                to={blob.path}
+                key={blob.name}
+                style={{
+                  textDecoration: "none",
+                  color: "rgba(255, 255, 255, 0.87)",
+                }}
+              >
+                <ListItem button onClick={() => setOpen(false)}>
+                  <ListItemText primary={blob.name} />
+                </ListItem>
+              </Link>
+            ))}
+          </List>
+        ) : (
+          <List>
+            {privateList.map((blob, index) => (
+              <Link
+                to={blob.path}
+                key={blob.name}
+                style={{
+                  textDecoration: "none",
+                  color: "rgba(255, 255, 255, 0.87)",
+                }}
+              >
+                <ListItem button onClick={() => setOpen(false)}>
+                  <ListItemText primary={blob.name} />
+                </ListItem>
+              </Link>
+            ))}
+          </List>
+        )}
       </Drawer>
     </>
   );
