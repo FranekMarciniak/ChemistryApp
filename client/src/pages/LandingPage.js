@@ -3,6 +3,9 @@ import Wrapper from "../components/UniversalComponents/Wrapper";
 import { AuthContext } from "../context/auth/authState";
 function Home() {
   const authContext = useContext(AuthContext);
+  useEffect(() => {
+    authContext.loadUser();
+  }, []);
   return (
     <Wrapper>
       <h1>landing</h1>
