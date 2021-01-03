@@ -13,8 +13,10 @@ import {
   SET_ERROR,
   CLEAR_ERROR,
   CLEAR_ALL,
+  DELETE_EXERCISES_FROM_API,
   POST_TEST_EXERCISE_TO_API_FAIL,
   POST_TEST_EXERCISE_TO_API_SUCCESS,
+  GET_ALL_EXERCISES_FROM_API,
 } from "../types.js";
 import axios from "axios";
 import React, { useReducer, createContext } from "react";
@@ -34,6 +36,7 @@ function ExerciseCreatorState(props) {
     currentExercise: {},
     errors: [],
     doneExercises: [],
+    allExercises: [],
   };
   const [state, dispatch] = useReducer(ExerciseCreatorReducer, initialState);
   const setCurrentBlueprintFromList = (id) => {
@@ -197,6 +200,24 @@ function ExerciseCreatorState(props) {
       console.log(error);
     }
   };
+  const getAllExercisesFromAPI = async () => {
+    try {
+      const res = await axios.get("/api/exercises", config);
+      dispatch({ type: GET_ALL_EXERCISES_FROM_API, payload: res.data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const deleteExerciseFromAPI = async (id) => {
+    try {
+      const res = await axios.delete(`/api/exercises/${id}`, config);
+      if (res.status === 200) {
+        dispatch({ type: DELETE_EXERCISES_FROM_API, payload: id });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const clearAll = () => {
     dispatch({ type: CLEAR_ALL });
   };
@@ -209,6 +230,7 @@ function ExerciseCreatorState(props) {
         testExercise: state.testExercise,
         errors: state.errors,
         doneExercises: state.doneExercises,
+        allExercises: state.allExercises,
         setCurrentBlueprintFromList,
         updateExercise,
         setExerciseFromBlueprint,
@@ -222,6 +244,8 @@ function ExerciseCreatorState(props) {
         getTestExerciseFromAPI,
         postExerciseToAPI,
         postTestExerciseToAPI,
+        getAllExercisesFromAPI,
+        deleteExerciseFromAPI,
         clearAll,
       }}
     >

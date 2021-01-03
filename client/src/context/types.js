@@ -13,7 +13,6 @@ export const CLEAR_CURRENT_BLUEPRINT = "CLEAR_CURRENT_BLUEPRINT";
 export const CLEAR_CURRENT_EXERCISE = "CLEAR_CURRENT_EXERCISE";
 export const GET_BLUEPRINTS_FROM_API = "GET_BLUEPRINTS_FROM_API";
 export const POST_EXERCISE_TO_API = "POST_EXERCISE_TO_API";
-
 //Blueprint creator Types
 export const SET_BLUEPRINT_NAME = "SET_BLUEPRINT_NAME";
 export const SET_BLUEPRINT_LEFT = "SET_BLUEPRINT_LEFT";
@@ -40,6 +39,10 @@ export const AUTH_ERROR = "AUTH_ERROR";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
 export const LOGOUT = "LOGOUT";
+
+//exercise list types
+export const GET_ALL_EXERCISES_FROM_API = "GET_ALL_EXERCISES_FROM_API";
+export const DELETE_EXERCISES_FROM_API = "DELETE_EXERCISES_FROM_API";
 
 //global types
 export const CLEAR_ALL = "CLEAR_ALL";

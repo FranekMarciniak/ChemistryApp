@@ -11,6 +11,8 @@ import {
   SET_CURRENT_TEST_EXERCISE,
   GET_BLUEPRINTS_FROM_API,
   GET_EXERCISE_FROM_API,
+  GET_ALL_EXERCISES_FROM_API,
+  DELETE_EXERCISES_FROM_API,
   POST_EXERCISE_TO_API,
   SET_ERROR,
   CLEAR_ERROR,
@@ -125,6 +127,18 @@ export default (state, action) => {
         ...state,
         errors: [],
       };
+    case GET_ALL_EXERCISES_FROM_API:
+      return {
+        ...state,
+        allExercises: [...action.payload],
+      };
+    case DELETE_EXERCISES_FROM_API:
+      return {
+        ...state,
+        allExercises: state.allExercises.filter(
+          (blob) => blob._id !== action.payload
+        ),
+      };
     case CLEAR_ALL:
       return {
         ...state,
@@ -134,6 +148,7 @@ export default (state, action) => {
         currentExercise: {},
         errors: [],
         doneExercises: [],
+        allExercises: [],
       };
     default:
       return { ...state };
