@@ -107,7 +107,7 @@ function ExerciseCreatorForm() {
           <DialogTitle id="alert-dialog-title">{testExercise.name}</DialogTitle>
           <DialogContent
             style={{
-              width: "300px",
+              maxWidth: "600px",
               display: "flex",
             }}
           >
