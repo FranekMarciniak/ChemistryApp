@@ -97,7 +97,7 @@ function Header() {
     { name: "Login", path: "/login" },
   ];
   const privateList = [
-    { name: "Home", path: "/" },
+    { name: "Home", path: "/home" },
     { name: "Create blueprint", path: "/blueprint" },
     { name: "Create example", path: "/example" },
     { name: "Test yourself", path: "/test" },

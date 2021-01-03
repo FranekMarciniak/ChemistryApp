@@ -44,7 +44,7 @@ function LoginPage(props) {
   });
   useEffect(() => {
     if (authContext.isAuthenticated === true) {
-      props.history.push("/");
+      props.history.push("/home");
     }
   }, [authContext.isAuthenticated, props.history]);
   const handleSubmit = (e) => {
