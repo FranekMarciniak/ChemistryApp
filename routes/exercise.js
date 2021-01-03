@@ -47,4 +47,22 @@ router.post("/", authMiddleware, async (req, res) => {
     res.status(500).json({ msg: "Something went wrong" });
   }
 });
+router.delete("/:id", authMiddleware, async (req, res) => {
+  try {
+    const exercise = await Exercise.findOne({
+      _id: req.params.id,
+    });
+    if (!exercise) {
+      res.json({
+        msg: "not found",
+      });
+    }
+    exercise.delete();
+    res.json(exercise);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: "Something went wrong" });
+  }
+});
+
 module.exports = router;
