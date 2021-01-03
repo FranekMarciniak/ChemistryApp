@@ -39,7 +39,7 @@ function RegisterPage(props) {
   const classes = useStyles();
   useEffect(() => {
     if (authContext.isAuthenticated === true) {
-      props.history.push("/");
+      props.history.push("/home");
     }
   }, [authContext.isAuthenticated, props.history]);
   const [form, setFrom] = useState({

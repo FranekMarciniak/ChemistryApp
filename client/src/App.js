@@ -7,6 +7,7 @@ import ExerciseCreatorPage from "./pages/ExerciseCreatorPage";
 import ListOfExercisesPage from "./pages/ListOfExercisesPage";
 import ExercisesPage from "./pages/ExercisesPage";
 import HomePage from "./pages/HomePage";
+import LandingPage from "./pages/LandingPage";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import ExerciseCreatorState from "./context/exerciseCreator/exerciseCreatorState";
@@ -27,12 +28,13 @@ function App() {
           <AuthState>
             <Layout>
               <Switch>
-                <Route exact path="/" component={HomePage} />
+                <Route exact path="/" component={LandingPage} />
                 <PrivateRoute
                   exact
                   path="/blueprint"
                   component={BlueprintCreatorPage}
                 />
+                <PrivateRoute exact path="/home" component={HomePage} />
                 <PrivateRoute
                   exact
                   path="/example"
