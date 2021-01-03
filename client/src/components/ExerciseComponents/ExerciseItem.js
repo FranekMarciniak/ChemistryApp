@@ -6,16 +6,16 @@ import PlusSign from "../UniversalComponents/PlusSign";
 import { ExerciseCreatorContext } from "../../context/exerciseCreator/exerciseCreatorState";
 
 const ExerciseItemWrapper = styled.div`
-  width: 124px;
+  width: 135px;
   display: flex;
 `;
 const useStyles = makeStyles(() => ({
   ratio: {
-    width: "20px",
+    width: "25px",
     marginRight: "8px",
   },
   value: {
-    width: "80px",
+    width: "110px",
   },
 }));
 function ExerciseItem({ last, side, index }) {
