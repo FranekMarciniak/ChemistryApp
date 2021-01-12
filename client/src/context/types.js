@@ -40,9 +40,10 @@ export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
 export const LOGOUT = "LOGOUT";
 
-//exercise list types
+//list types
 export const GET_ALL_EXERCISES_FROM_API = "GET_ALL_EXERCISES_FROM_API";
 export const DELETE_EXERCISES_FROM_API = "DELETE_EXERCISES_FROM_API";
+export const DELETE_BLUEPRINT_FROM_API = "DELETE_BLUEPRINT_FROM_API";
 
 //global types
 export const CLEAR_ALL = "CLEAR_ALL";

@@ -101,7 +101,8 @@ function Header() {
     { name: "Create blueprint", path: "/blueprint" },
     { name: "Create example", path: "/example" },
     { name: "Test yourself", path: "/test" },
-    { name: "View the list", path: "/list" },
+    { name: "View the list of exercises", path: "/listOfExercises" },
+    { name: "View the list of blueprints", path: "/listOfBlueprints" },
   ];
   const classes = useStyles();
   const theme = useTheme();
