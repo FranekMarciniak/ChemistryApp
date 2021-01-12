@@ -16,6 +16,7 @@ import AuthState from "./context/auth/authState";
 import setTokenToLocalstorage from "./util/setTokenToLocalstorage";
 import { AuthContext } from "./context/auth/authState";
 import PrivateRoute from "./components/UniversalComponents/PrivateRoute";
+import ListOfBlueprintsPage from "./pages/ListOfBlueprintsPage";
 import { useContext, useEffect } from "react";
 if (localStorage.token) {
   setTokenToLocalstorage(localStorage.token);
@@ -43,8 +44,13 @@ function App() {
                 <PrivateRoute exact path="/test" component={ExercisesPage} />
                 <PrivateRoute
                   exact
-                  path="/list"
+                  path="/listOfExercises"
                   component={ListOfExercisesPage}
+                />
+                <PrivateRoute
+                  exact
+                  path="/listOfBlueprints"
+                  component={ListOfBlueprintsPage}
                 />
                 <Route exact path="/register" component={RegisterPage} />
                 <Route exact path="/login" component={LoginPage} />

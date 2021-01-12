@@ -11,12 +11,13 @@ import {
   GET_EXERCISE_FROM_API,
   POST_EXERCISE_TO_API,
   SET_ERROR,
-  CLEAR_ERROR,
   CLEAR_ALL,
   DELETE_EXERCISES_FROM_API,
   POST_TEST_EXERCISE_TO_API_FAIL,
   POST_TEST_EXERCISE_TO_API_SUCCESS,
   GET_ALL_EXERCISES_FROM_API,
+  CLEAR_ERROR,
+  DELETE_BLUEPRINT_FROM_API,
 } from "../types.js";
 import axios from "axios";
 import React, { useReducer, createContext } from "react";
@@ -121,7 +122,14 @@ function ExerciseCreatorState(props) {
       const res = await axios.get("/api/test", config);
       dispatch({ type: GET_EXERCISE_FROM_API, payload: res.data });
     } catch (error) {
-      console.log(error);
+      dispatch({
+        type: SET_ERROR,
+        payload: {
+          data: "You don't have any exercises :(",
+          severity: "error",
+        },
+      });
+      setTimeout(() => dispatch({ type: CLEAR_ERROR }), 3500);
     }
   };
   const postTestExerciseToAPI = async (blob) => {
@@ -218,6 +226,16 @@ function ExerciseCreatorState(props) {
       console.log(error);
     }
   };
+  const deleteBlueprintFromAPI = async (id) => {
+    try {
+      const res = await axios.delete(`/api/blueprints/${id}`, config);
+      if (res.status === 200) {
+        dispatch({ type: DELETE_BLUEPRINT_FROM_API, payload: id });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const clearAll = () => {
     dispatch({ type: CLEAR_ALL });
   };
@@ -239,6 +257,7 @@ function ExerciseCreatorState(props) {
         setExerciseTop,
         setCurrentBlueprintFromAPI,
         setCurrentTestExercise,
+        deleteBlueprintFromAPI,
         clearCurrentBlueprint,
         getBlueprintsFromAPI,
         getTestExerciseFromAPI,

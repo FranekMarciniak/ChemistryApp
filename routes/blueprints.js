@@ -36,4 +36,21 @@ router.post("/", authMiddleware, async (req, res) => {
     res.status(500).json({ msg: "Something went wrong" });
   }
 });
+router.delete("/:id", authMiddleware, async (req, res) => {
+  try {
+    const blueprint = await Blueprint.findOne({
+      _id: req.params.id,
+    });
+    if (!blueprint) {
+      res.json({
+        msg: "not found",
+      });
+    }
+    blueprint.delete();
+    res.json(blueprint);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: "Something went wrong" });
+  }
+});
 module.exports = router;

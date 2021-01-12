@@ -13,6 +13,7 @@ import {
   GET_EXERCISE_FROM_API,
   GET_ALL_EXERCISES_FROM_API,
   DELETE_EXERCISES_FROM_API,
+  DELETE_BLUEPRINT_FROM_API,
   POST_EXERCISE_TO_API,
   SET_ERROR,
   CLEAR_ERROR,
@@ -136,6 +137,13 @@ export default (state, action) => {
       return {
         ...state,
         allExercises: state.allExercises.filter(
+          (blob) => blob._id !== action.payload
+        ),
+      };
+    case DELETE_BLUEPRINT_FROM_API:
+      return {
+        ...state,
+        blueprints: state.blueprints.filter(
           (blob) => blob._id !== action.payload
         ),
       };
