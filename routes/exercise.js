@@ -39,7 +39,6 @@ router.post("/", authMiddleware, async (req, res) => {
       },
       user: req.user.id,
     });
-    console.log(req.user.id);
     const exer = await newExercise.save();
     res.json(exer);
   } catch (error) {

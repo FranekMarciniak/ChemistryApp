@@ -13,7 +13,6 @@ router.get("/", authMiddleware, async (req, res) => {
     });
     const randomNum = Math.floor(Math.random() * exercises.length);
     const randomExercise = exercises[randomNum];
-    console.log(randomExercise._id);
     res.json(randomExercise);
   } catch (error) {
     console.error(error);
@@ -60,7 +59,6 @@ router.post("/", authMiddleware, async (req, res) => {
       id: exerciseFromDB._id.toString(),
     };
     const result = _.isEqual(exerciseFromDBFormated, exerciseFromUser);
-    console.log(result);
     res.json(result);
   } catch (error) {
     console.error(error);

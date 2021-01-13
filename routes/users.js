@@ -103,7 +103,6 @@ router.post(
           res.json({ token });
         }
       );
-      console.log("done");
     } catch (error) {
       console.error(error);
       res.status(500).json({ msg: "Something went wrong" });
