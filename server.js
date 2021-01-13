@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const db = mongoose.connection;
 const app = express();
-require("newrelic");
 
 app.use(cors());
 mongoose.connect(

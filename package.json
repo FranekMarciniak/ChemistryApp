@@ -30,7 +30,6 @@
     "lodash": "^4.17.20",
     "mongodb": "^3.6.3",
     "mongoose": "^5.11.4",
-    "mongoose-simple-random": "^0.4.1",
-    "newrelic": "^7.0.2"
+    "mongoose-simple-random": "^0.4.1"
   }
 }

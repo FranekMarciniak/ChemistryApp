@@ -33,7 +33,6 @@ function AuthState(props) {
         payload: res.data,
       });
     } catch (error) {
-      console.log("ass");
       dispatch({
         type: AUTH_ERROR,
         payload: error,
