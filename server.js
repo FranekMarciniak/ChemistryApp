@@ -4,13 +4,12 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const db = mongoose.connection;
 const app = express();
-
+require("custom-env").env();
 app.use(cors());
 mongoose.connect(
-  "mongodb+srv://admin:***REMOVED***@cluster0.vu14o.mongodb.net/database?retryWrites=true&w=majority",
+  `mongodb+srv://admin:${process.env.MONGODB_ATLAS}@cluster0.vu14o.mongodb.net/database?retryWrites=true&w=majority`,
   { useNewUrlParser: true, useUnifiedTopology: true }
 );
-
 db.once("open", function () {
   console.log("mongoose conected <3");
 });
