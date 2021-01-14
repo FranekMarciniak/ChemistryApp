@@ -10,14 +10,14 @@ router.get("/login", authMiddleware, async (req, res) => {
     res.json(req.user);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ msg: "Something went wrong" });
+    res.status(500).json({ errors: [{ msg: "Something went wrong" }] });
   }
 });
 
 router.post(
   "/login",
   [
-    check("email", "please enter email").isEmail(),
+    check("email", "please enter valid email").isEmail(),
     check("password", "please enter valid password").exists(),
   ],
   async (req, res) => {
@@ -30,13 +30,13 @@ router.post(
     try {
       let user = await User.findOne({ email });
       if (!user) {
-        return res.status(400).json({ msg: "invalid email" });
+        return res.status(400).json({ errors: [{ msg: "invalid email" }] });
       }
 
       const isMatch = await bcrypt.compare(password, user.password);
 
       if (!isMatch) {
-        return res.status(400).json({ msg: "invalid password" });
+        return res.status(400).json({ errors: [{ msg: "invalid password" }] });
       }
       const payload = {
         user: {
@@ -56,7 +56,7 @@ router.post(
       );
     } catch (error) {
       console.error(error.message);
-      return res.status(500).json({ msg: "server error" });
+      return res.status(500).json({ errors: [{ msg: "Server error" }] });
     }
   }
 );
@@ -80,7 +80,9 @@ router.post(
     try {
       let user = await User.findOne({ email: email });
       if (user) {
-        return res.status(400).json({ msg: "User already exists" });
+        return res
+          .status(400)
+          .json({ errors: [{ msg: "User already exists" }] });
       }
 
       user = new User({ login, email, password });
@@ -105,7 +107,7 @@ router.post(
       );
     } catch (error) {
       console.error(error);
-      res.status(500).json({ msg: "Something went wrong" });
+      res.status(500).json({ errors: [{ msg: "Something went wrong" }] });
     }
   }
 );

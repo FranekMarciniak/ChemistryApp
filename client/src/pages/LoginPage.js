@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core";
 import styled from "styled-components";
 import { AuthContext } from "../context/auth/authState";
-
+import AlertWidget from "../components/UniversalComponents/AlertWidget";
 const FormRow = styled.div`
   width: 100%;
   height: 100px;
@@ -37,6 +37,7 @@ const useStyles = makeStyles({
 
 function LoginPage(props) {
   const authContext = useContext(AuthContext);
+  const { errors } = authContext;
   const classes = useStyles();
   const [form, setFrom] = useState({
     email: "",
@@ -56,6 +57,7 @@ function LoginPage(props) {
   };
   return (
     <form onSubmit={handleSubmit}>
+      {errors.length > 0 ? <AlertWidget errors={errors} /> : null}
       <FormRow>
         <Typography className={classes.typography}>Your email</Typography>
         <TextField

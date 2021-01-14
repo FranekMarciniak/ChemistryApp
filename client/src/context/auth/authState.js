@@ -33,10 +33,18 @@ function AuthState(props) {
         payload: res.data,
       });
     } catch (error) {
-      dispatch({
-        type: AUTH_ERROR,
-        payload: error,
-      });
+      // dispatch({
+      //   type: AUTH_ERROR,
+      //   payload: error,
+      // });
+      // setTimeout(
+      //   () =>
+      //     dispatch({
+      //       type: CLEAR_ERRORS,
+      //     }),
+      //   3000
+      // );
+      console.log(error.response.data);
     }
   };
 
@@ -66,8 +74,16 @@ function AuthState(props) {
     } catch (error) {
       dispatch({
         type: REGISTER_FAIL,
-        payload: error.response.data.msg,
+        payload: { data: error.response.data.errors[0].msg, severity: "error" },
       });
+
+      setTimeout(
+        () =>
+          dispatch({
+            type: CLEAR_ERRORS,
+          }),
+        3000
+      );
     }
   };
 
@@ -95,8 +111,15 @@ function AuthState(props) {
     } catch (error) {
       dispatch({
         type: LOGIN_FAIL,
-        payload: error.response.data.msg,
+        payload: { data: error.response.data.errors[0].msg, severity: "error" },
       });
+      setTimeout(
+        () =>
+          dispatch({
+            type: CLEAR_ERRORS,
+          }),
+        3000
+      );
     }
   };
   //Logout user
@@ -118,7 +141,7 @@ function AuthState(props) {
         token: state.token,
         isAuthenticated: state.isAuthenticated,
         loading: state.loading,
-        error: state.error,
+        errors: state.errors,
         registerUser,
         loginUser,
         logout,
