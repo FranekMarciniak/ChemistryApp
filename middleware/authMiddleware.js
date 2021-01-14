@@ -6,7 +6,7 @@ module.exports = function (req, res, next) {
     return res.status(401).json({ msg: "No token, auth denied" });
   }
   try {
-    const decoded = jwt.verify(token, "***REMOVED***");
+    const decoded = jwt.verify(token, ***REMOVED***);
     req.user = decoded.user;
     next();
   } catch (error) {

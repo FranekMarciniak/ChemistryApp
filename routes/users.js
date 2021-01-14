@@ -45,7 +45,7 @@ router.post(
       };
       jwt.sign(
         payload,
-        "***REMOVED***",
+        ***REMOVED***,
         {
           expiresIn: 36500,
         },
@@ -96,7 +96,7 @@ router.post(
       };
       jwt.sign(
         payload,
-        "***REMOVED***",
+        ***REMOVED***,
         {
           expiresIn: 36500,
         },
