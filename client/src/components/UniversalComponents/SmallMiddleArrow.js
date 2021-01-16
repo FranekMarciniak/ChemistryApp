@@ -25,7 +25,7 @@ function SmallMiddleArrow({ text }) {
   return (
     <>
       <MiddleArrowWrapper>
-        {text === "" ? (
+        {text === "" || text === "false" ? (
           <img src={arrow} alt="arrow" />
         ) : (
           <>
